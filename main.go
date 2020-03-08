@@ -3,19 +3,27 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
-
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/log"
 )
 
 func main() {
 	//http.HandleFunc("/_ah/warmup", warmupHandler)
 	http.HandleFunc("/", defaultHandler)
 
-	appengine.Main()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Printf("Defaulting to port %s", port)
+	}
+
+	log.Printf("Listening on port %s", port)
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func warmupHandler(w http.ResponseWriter, r *http.Request) {
@@ -23,8 +31,6 @@ func warmupHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-
 	// Handle host or host:port
 	domain := strings.Split(r.Host, ":")
 	domain = strings.Split(domain[0], ".")
@@ -104,6 +110,6 @@ SUB_START:
 		site += path
 	}
 
-	log.Debugf(c, "%v <- %v <- %v", site, domain[subStart:subEnd], domain)
+	log.Printf("%v <- %v <- %v", site, domain[subStart:subEnd], domain)
 	http.Redirect(w, r, site, 301)
 }
