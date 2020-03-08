@@ -31,9 +31,13 @@ func warmupHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	// Handle host or host:port
-	domain := strings.Split(r.Host, ":")
-	domain = strings.Split(domain[0], ".")
+	host := r.Host
+	if i := strings.Index(host, ":"); i != -1 {
+		// Handle host or host:port
+		log.Printf("%v -> host %v, port %v", host, host[:i], host[i:])
+		host = host[:i]
+	}
+	domain := strings.Split(host, ".")
 	path := r.RequestURI
 
 	// Get subdomain part
