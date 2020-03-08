@@ -85,7 +85,11 @@ SUB_START:
 				case "dunk":
 					site = "http://games.victorz.ca/cat/6/dunk"
 				case "r":
-					site = r.URL.Scheme + "://" + r.Host
+					scheme := "http"
+					if r.TLS != nil {
+						scheme = "https"
+					}
+					site = scheme + "://" + r.Host
 					num := 0
 					if len(path) >= 1 {
 						num, _ = strconv.Atoi(path[1:])
