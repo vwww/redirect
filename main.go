@@ -62,18 +62,18 @@ SUB_START:
 	}
 
 	// Get site
-	site := "http://victorz.ca"
+	site := "https://victorz.ca"
 	if subEnd != subStart { // subEnd-subStart != 0
 		// Check subdomain (partial suffix)
 		switch domain[subEnd-1] {
 		case "acr":
-			site = "http://acr.victorz.ca"
+			site = "https://acr.victorz.ca"
 			subEnd--
 			/*
 				if subEnd != subStart {
 					switch domain[subEnd-1] {
 					case "forum":
-						site = "http://forum.acr.victorz.ca"
+						site = "https://forum.acr.victorz.ca"
 						subEnd--
 					}
 				}
@@ -83,7 +83,7 @@ SUB_START:
 				// Check subdomain (exact match)
 				switch domain[subStart] {
 				case "dunk":
-					site = "http://games.victorz.ca/cat/6/dunk"
+					site = "https://games.victorz.ca/cat/6/dunk"
 				case "r":
 					scheme := "http"
 					if r.TLS != nil {
