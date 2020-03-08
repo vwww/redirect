@@ -1,4 +1,4 @@
-runtime: go111
+runtime: go112
 automatic_scaling:
   min_idle_instances: 1 # resident instance
   max_idle_instances: 1 # cap
