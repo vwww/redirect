@@ -78,8 +78,6 @@ SUB_START:
 				switch domain[subStart] {
 				case "dunk":
 					site = "http://games.victorz.ca/cat/6/dunk"
-				case "tony":
-					site = "https://codeblog.jonskeet.uk/2009/11/02/omg-ponies-aka-humanity-epic-fail/"
 				case "r":
 					site = r.URL.Scheme + "://" + r.Host
 					num := 0
