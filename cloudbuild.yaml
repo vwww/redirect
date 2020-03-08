@@ -1,0 +1,8 @@
+steps:
+- name: golang
+  args: ['go', 'get', '-u', 'google.golang.org/appengine']
+  env: ['GOPATH=/workspace']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', './src/web']
+  env: ['GOPATH=/workspace']
+timeout: 1600s

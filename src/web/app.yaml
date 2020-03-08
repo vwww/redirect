@@ -1,0 +1,12 @@
+runtime: go111
+automatic_scaling:
+  min_idle_instances: 1 # resident instance
+  max_idle_instances: 1 # cap
+  max_pending_latency: 10ms # serve ASAP
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /.*
+  script: auto
