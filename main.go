@@ -73,15 +73,23 @@ SUB_START:
 		case "acr":
 			site = "https://acr.victorz.ca"
 			subEnd--
-			/*
-				if subEnd != subStart {
-					switch domain[subEnd-1] {
-					case "forum":
-						site = "https://forum.acr.victorz.ca"
-						subEnd--
+
+			if subEnd != subStart {
+				switch domain[subEnd-1] {
+				case "forum":
+					site = "https://acrf.victorz.ca"
+					subEnd--
+
+					if subEnd != subStart {
+						switch domain[subEnd-1] {
+						case "chat":
+							site = "https://acrfc.victorz.ca"
+							subEnd--
+						}
 					}
 				}
-			*/
+			}
+
 		default:
 			if subEnd-subStart == 1 {
 				// Check subdomain (exact match)
